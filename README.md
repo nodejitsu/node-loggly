@@ -58,7 +58,7 @@ The second way to send log information to loggly is to do so once you've retriev
 
 Again the callback in the above example is optional and you can pass it if you'd like to.
 
-### Logging Shallow JSON Object Literals
+### Logging Shallow JSON Object Literals as a String
 In addition to logging pure strings it is also possible to pass shallow JSON object literals (i.e. no nested objects) to client.log(..) or input.log(..) methods, which will get converted into the [Loggly recommended string representation][1]. So
 
 ``` js
@@ -75,6 +75,41 @@ will be logged as:
 
 ```
   foo=1,bar=2,buzz=3
+```
+
+### Logging Objects to JSON Enabled Loggly Inputs
+It is also possible to log complex objects using the new JSON capabilities of loggly. To enable JSON functionality in the client simply add 'json: true' to the configuration:
+
+``` js
+  var config = {
+    subdomain: "your-subdomain",
+    auth: {
+      username: "your-username",
+      password: "your-password"
+    },
+    json: true
+  };
+```
+
+When the json flag is enabled, objects will be converted to JSON using JSON.stringify before being transmitted to loggly. So
+
+``` js
+  var source = {
+    foo: 1,
+    bar: 2,
+    buzz: {
+      sheep: 'jumped',
+      times: 10
+    }
+  };
+
+  input.log(source);
+```
+
+will be logged as:
+
+``` json
+  {"foo":1,"bar":2,"buzz":{"sheep":"jumped","times":10}}
 ```
 
 ### Searching
@@ -144,7 +179,7 @@ Loggly exposes several entities that are available through node-loggly: inputs a
 ```
 
 ## Run Tests
-All of the node-loggly tests are written in [vows][8], and cover all of the use cases described above. You will need to add your Loggly username, password, subdomain, and a test input to test/data/test-config.json before running tests:
+All of the node-loggly tests are written in [vows][8], and cover all of the use cases described above. You will need to add your Loggly username, password, subdomain, and a two test inputs to test/data/test-config.json before running tests. When configuring the test inputs on loggly, the first test input should be named 'test' using the HTTP service. The second input should be name 'test_json' using the HTTP service with the JSON logging option enabled:
 
 ``` js
   {
@@ -153,10 +188,16 @@ All of the node-loggly tests are written in [vows][8], and cover all of the use 
       "username": "your-username",
       "password": "your-password"
     },
-    "inputs": [{
-      "token": "your-really-long-token-you-got-when-you-created-an-http-input",
-      "id": 000 // ID of this input
-    }]
+    "inputs": [
+      {
+        "token": "your-really-long-token-you-got-when-you-created-an-http-input", // 'text' input
+        "id": 000 // ID of this input
+      },
+      {
+        "token": "your-really-long-token-you-got-when-you-created-an-http-input", // 'json' input
+        "id": 001 // ID of this input
+      },
+    ]
   }
 ```
 
@@ -167,7 +208,7 @@ Once you have valid Loggly credentials you can run tests with [vows][8]:
 ```
 
 #### Author: [Charlie Robbins](http://www.github.com/indexzero)
-#### Contributors: [Marak Squires](http://github.com/marak), [hij1nx](http://github.com/hij1nx), [Kord Campbell](http://loggly.com)
+#### Contributors: [Marak Squires](http://github.com/marak), [hij1nx](http://github.com/hij1nx), [Kord Campbell](http://loggly.com), [Erik Hedenström](http://github.com/ehedenst),
 
 [0]: http://wiki.loggly.com/apidocumentation
 [1]: http://wiki.loggly.com/loggingfromcode

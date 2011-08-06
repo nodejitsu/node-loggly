@@ -5,7 +5,7 @@
  * MIT LICENSE
  *
  */
- 
+
 var fs = require('fs'),
     util = require('util'),
     path = require('path'),
@@ -20,7 +20,7 @@ helpers.loadConfig = function () {
     var configFile = path.join(__dirname, 'data', 'test-config.json'),
         stats = fs.statSync(configFile)
         config = JSON.parse(fs.readFileSync(configFile).toString());
-    if (config.subdomain === 'test-subdomain' 
+    if (config.subdomain === 'test-subdomain'
         || config.auth.username === 'test-username'
         || config.auth.password === 'test-password') {
       util.puts('Config file test-config.json must be updated with valid data before running tests');
