@@ -35,7 +35,7 @@ vows.describe('node-loggly/inputs').addBatch({
     "the getInput method": {
       "when called with a plaintext input": {
         topic: function () {
-          loggly.getInput('test', this.callback);
+          loggly.getInput(config.inputs.test.name, this.callback);
         },
         "should return a valid input": function (err, input) {
           assert.isNull(err);
@@ -53,7 +53,7 @@ vows.describe('node-loggly/inputs').addBatch({
       },
       "when called with a json input": {
         topic: function () {
-          logglyJSON.getInput('test_json', this.callback);
+          logglyJSON.getInput(config.inputs.test_json.name, this.callback);
         },
         "should return a valid input": function (err, input) {
           assert.isNull(err);

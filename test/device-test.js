@@ -36,6 +36,67 @@ vows.describe('node-loggly/devices').addBatch({
         assert.isNull(err);
         assert.equal(res.statusCode, 200);
       }
+    },
+    "the removeDevice() method": {
+      topic: function () {
+        var cb = this.callback;
+        loggly.addDeviceToInput(config.inputs.test.id, '127.0.0.2', function(err, res) {
+          assert.isNull(err);
+          assert.equal(res.statusCode, 200);
+          loggly.removeDevice('127.0.0.2', cb);
+        });
+      },
+      "should respond with 204 status code": function (err, res) {
+        assert.isNull(err);
+        assert.equal(res.statusCode, 204);
+      },
+      "followed by the getDevices() method": {
+        topic: function () {
+          loggly.getDevices(this.callback);
+        },
+        "should not contain the device": function (err, devices) {
+          assert.isNull(err);
+          devices.forEach(function (device) {
+            assert.notEqual(device.ipAddress, '127.0.0.2');
+          });
+        }
+      }
+    },
+    "the device.remove() method": {
+      topic: function () {
+        var cb = this.callback;
+        loggly.addDeviceToInput(config.inputs.test.id, '127.0.0.3', function(err, res) {
+          assert.isNull(err);
+          assert.equal(res.statusCode, 200);
+          loggly.getDevices(function(err, devices) {
+            assert.isNull(err);
+            var device = null;
+            for (var i=0; i<devices.length; i++) {
+              var dev = devices[i];
+              if (dev.ip === '127.0.0.3') {
+                device = dev;
+              }
+            }
+            assert.isNotNull(device, 'Device should exist');
+            device.remove(cb);
+          });
+        });
+      },
+      "should respond with 204 status code": function (err, res) {
+        assert.isNull(err);
+        assert.equal(res.statusCode, 204);
+      },
+      "followed by the getDevices() method": {
+        topic: function () {
+          loggly.getDevices(this.callback);
+        },
+        "should not contain the device": function (err, devices) {
+          assert.isNull(err);
+          devices.forEach(function (device) {
+            assert.notEqual(device.ipAddress, '127.0.0.3');
+          });
+        }
+      }
     }
   }
 }).export(module);
