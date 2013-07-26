@@ -181,6 +181,13 @@ Loggly exposes several entities that are available through node-loggly: inputs a
   // Removes device from all inputs
   //
   client.removeDevice('device-ip', function (err, result) { /* ... */ });
+
+  //
+  // Removes device from only one input
+  //
+  client.removeDeviceFromInput('input-id', device-ip', function (err, result) { /* ... */ });
+
+  
 ```
 
 ## Run Tests
