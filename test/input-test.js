@@ -217,16 +217,51 @@ vows.describe('node-loggly/inputs').addBatch({
             }
           }
           assert(contains, 'Device in array');
+          loggly.removeDevice('127.0.1.0', function(err, res) {
+            assert.isNull(err);
+            assert.equal(res.statusCode, 204);
+          });
+        }
+      }
+    },
+    "the addDevice method with a name": {
+      topic: function () {
+        testContext.input.addDevice('127.0.2.0', 'testdevice', this.callback);
+      },
+      "should respond with 200 status code": function (err, res) {
+        assert.isNull(err);
+        assert.equal(res.statusCode, 200);
+      },
+      "followed by a get": {
+        topic: function () {
+          loggly.getInput(config.inputs.test.name, this.callback);
+        },
+        "should contain the device": function (err, result) {
+          assert.isNull(err);
+          assert.isObject(result);
+          var contains = false;
+          for (var i=0; i<result.devices.length; i++) {
+            var dev = result.devices[i];
+            if (dev.ip === '127.0.2.0' && dev.name === 'testdevice') {
+              contains = true;
+              break;
+            }
+          }
+          assert(contains, 'Device in array');
+          loggly.removeDevice('127.0.2.0', function(err, res) {
+            assert.isNull(err);
+            assert.equal(res.statusCode, 204);
+          });
         }
       }
     },
     "the removeDevice method": {
       topic: function () {
         var cb = this.callback;
-        testContext.input.addDevice('127.0.1.1', function(err, res) {
+        testContext.input.addDevice('127.0.1.10', function(err, res) {
           assert.isNull(err);
           assert.equal(res.statusCode, 200);
-          testContext.input.removeDevice('127.0.1.1', cb);
+          testContext.input.removeDevice('127.0.1.10', cb);
         });
       },
       "should respond with 204 status code": function (err, res) {
@@ -241,14 +276,16 @@ vows.describe('node-loggly/inputs').addBatch({
           assert.isNull(err);
           assert.isObject(result);
           var contains = false;
-          for (var i=0; i<result.devices.length; i++) {
-            var dev = result.devices[i];
-            if (dev.ip === '127.0.1.1') {
-              contains = true;
-              break;
+          if (result.devices) {
+            for (var i=0; i<result.devices.length; i++) {
+              var dev = result.devices[i];
+              if (dev.ip === '127.0.1.10') {
+                contains = true;
+                break;
+              }
             }
+            assert(!contains, 'Device not in array');
           }
-          assert(!contains, 'Device not in array');
         }
       }
     },
@@ -273,15 +310,18 @@ vows.describe('node-loggly/inputs').addBatch({
         "should not contain the device": function (err, result) {
           assert.isNull(err);
           assert.isObject(result);
-          var contains = false;
-          for (var i=0; i<result.devices.length; i++) {
-            var dev = result.devices[i];
-            if (dev.ip === '127.0.3.1') {
-              contains = true;
-              break;
+          if (result.devices) {
+            var contains = false;
+            for (var i=0; i<result.devices.length; i++) {
+              var dev = result.devices[i];
+              if (dev.ip === '127.0.3.1') {
+                contains = true;
+                break;
+              }
             }
+            assert(!contains, 'Device not in array');
           }
-          assert(!contains, 'Device not in array');
+          
         }
       }
     }

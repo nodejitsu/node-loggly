@@ -35,6 +35,11 @@ vows.describe('node-loggly/devices').addBatch({
       "should respond with 200 status code": function (err, res) {
         assert.isNull(err);
         assert.equal(res.statusCode, 200);
+
+        loggly.removeDevice('127.0.0.1', function(err, res) {
+          assert.isNull(err);
+          assert.equal(res.statusCode, 204);
+        });
       }
     },
     "the removeDevice() method": {
