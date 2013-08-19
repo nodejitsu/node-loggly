@@ -10,6 +10,12 @@
     "type": "git",
     "url": "http://github.com/nodejitsu/node-loggly.git"
   },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.github.com/nodejitsu/node-loggly/master/LICENSE"
+    }
+  ],
   "keywords": [
     "cloud computing",
     "api",
