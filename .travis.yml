@@ -10,8 +10,8 @@ before_install:
   - travis_retry npm install --loglevel=http
   - >
     openssl aes-256-cbc \
-      -K $encrypted_4fb8e306b739_key \
-      -iv $encrypted_4fb8e306b739_iv \
+      -K $encrypted_c861c63614e1_key \
+      -iv $encrypted_c861c63614e1_iv \
       -in test/config.json.enc \
       -out test/config.json -d
 
