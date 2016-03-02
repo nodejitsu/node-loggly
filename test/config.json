@@ -1,0 +1,8 @@
+{
+    "token": "test",
+    "subdomain": "test",
+    "auth": {
+      "username": "test",
+      "password": "test"
+    }
+  }

@@ -9,6 +9,7 @@
 var path = require('path'),
     vows = require('vows'),
     assert = require('assert'),
+    nock = require('nock'),
     helpers = require('./helpers');
 
 var config = helpers.loadConfig(),
@@ -21,7 +22,14 @@ vows.describe('node-loggly/inputs (no auth)').addBatch({
       "to a 'text' input": {
         "when passed a callback": {
           topic: function () {
-            loggly.log(
+
+ 		nock("https://logs-01.loggly.com")
+		.post('/inputs/' + config.token)
+		.reply(200, {
+			"response" : "ok"				
+		});
+
+	    loggly.log(
               'this is a test logging message from /test/input-test.js',
               this.callback
             );
@@ -42,6 +50,10 @@ vows.describe('node-loggly/inputs (no auth)').addBatch({
       "to a 'text' input": {
         "when not passed a callback": {
           topic: function () {
+	    nock("https://logs-01.loggly.com")
+		.post('/inputs/' + config.token).reply(200, {
+			"response" : "ok"				
+		});
             loggly.log('this is a test logging message from /test/input-test.js');
             loggly.on('log', this.callback.bind(null, null));
           },
@@ -61,6 +73,11 @@ vows.describe('node-loggly/inputs (no auth)').addBatch({
       "to a 'json' input": {
         "when passed a callback": {
           topic: function () {
+
+ 		nock("https://logs-01.loggly.com")
+		.post('/inputs/' + config.token).reply(200, {
+			"response" : "ok"				
+		});
             logglyJSON.log({
               timestamp: new Date().getTime(),
               message: 'this is a test logging message from /test/input-test.js'
@@ -82,6 +99,10 @@ vows.describe('node-loggly/inputs (no auth)').addBatch({
       "to a 'json' input": {
         "when not passed a callback": {
           topic: function () {
+	     nock("https://logs-01.loggly.com")
+		.post('/inputs/' + config.token).reply(200, {
+			"response" : "ok"				
+		});
             logglyJSON.log({
               timestamp: new Date().getTime(),
               message: 'this is a test logging message from /test/input-test.js'
@@ -103,6 +124,10 @@ vows.describe('node-loggly/inputs (no auth)').addBatch({
       "to a 'json' input with a single tag": {
         "when not passed a callback": {
           topic: function () {
+	     nock("https://logs-01.loggly.com")
+		.post('/inputs/' + config.token).reply(200, {
+			"response" : "ok"				
+		});
             logglyJSON.log({
               timestamp: new Date().getTime(),
               message: 'this is a test logging message from /test/input-test.js'
@@ -124,6 +149,10 @@ vows.describe('node-loggly/inputs (no auth)').addBatch({
       "to a 'json' input with tags that exist as an array": {
         "when not passed a callback": {
           topic: function () {
+	     nock("https://logs-01.loggly.com")
+		.post('/inputs/' + config.token).reply(200, {
+			"response" : "ok"				
+		});
             logglyJSON.log({
               timestamp: new Date().getTime(),
               message: 'this is a test logging message from /test/input-test.js'
@@ -145,6 +174,10 @@ vows.describe('node-loggly/inputs (no auth)').addBatch({
       "takes an array": {
         "when not passed a callback": {
           topic: function () {
+	     nock("https://logs-01.loggly.com")
+		.post('/inputs/' + config.token).reply(200, {
+			"response" : "ok"				
+		});
             logglyJSON.log([
               { work: 'it harder' },
               { make: 'it better' }

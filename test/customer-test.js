@@ -9,6 +9,7 @@
 var path = require('path'),
     vows = require('vows'),
     assert = require('assert'),
+    nock = require('nock'),
     helpers = require('./helpers');
 
 var options = {},
@@ -20,7 +21,19 @@ vows.describe('node-loggly/customer').addBatch({
   "When using the node-loggly client": {
     "the customer() method": {
       topic: function () {
-        loggly.customer(this.callback);
+	
+	
+	 nock("https://"+config.subdomain+".loggly.com")
+		.get('/apiv2/customer')
+		.reply(200, {
+			"tokens" : ["test", "test2"],
+			"subdomain" : config.subdomain,
+			"subscription" : {
+				"key1" : "value1"			
+			}				
+		});
+	loggly.customer(this.callback);	
+        
       },
       "should return a valid customer": function (err, customer) {
         assert.isNull(err);
