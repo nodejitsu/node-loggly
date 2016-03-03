@@ -98,7 +98,7 @@ common.loggly = function () {
       auth        = args[0].auth;
       isBulk      = args[0].isBulk;
       headers     = args[0].headers;
-      proxy       = args[0].proxy;
+	  proxy       = args[0].proxy;
     }
   }
   else if (args.length === 2) {
@@ -121,7 +121,7 @@ common.loggly = function () {
   var requestOptions = {
     uri: isBulk ? uri + '/tag/' + headers['X-LOGGLY-TAG'] : uri,
     method: method,
-    headers: isBulk ? {} : headers || {},             // Set headers empty for bulk
+    headers: isBulk ? {} : headers || {}             // Set headers empty for bulk
     proxy: proxy
   };
 
