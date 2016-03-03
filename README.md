@@ -158,11 +158,11 @@ See the [Loggly search guide][search] for more details on how to effectively sea
 ```
 
 ## Run Tests
-All of the node-loggly tests are written in [vows][vows], and cover all of the use cases described above. You will need to add your Loggly username, password, subdomain, and a two test inputs to test/data/test-config.json before running tests. When configuring the test inputs on Loggly, the first test input should be named 'test' using the HTTP service. The second input should be name 'test_json' using the HTTP service with the JSON logging option enabled:
+All of the node-loggly tests are written in [vows][vows], and cover all of the use cases described above. You will need to add your Loggly username, password, subdomain, and you loggly token to test/config.json before running tests.
 
 ``` js
   {
-    "token": "your-really-long-token-you-got-when-you-created-an-http-input",
+    "token": "your-loggly-token",
     "subdomain": "your-subdomain",
     "auth": {
       "username": "your-username",
