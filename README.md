@@ -158,6 +158,8 @@ See the [Loggly search guide][search] for more details on how to effectively sea
 ```
 
 ## Run Tests
+
+### Run Tests by sending events to your Loggly Account
 All of the node-loggly tests are written in [vows][vows], and cover all of the use cases described above. You will need to add your Loggly username, password, subdomain, and your loggly token to test/config.json before running tests.
 
 ``` js
@@ -176,6 +178,12 @@ Once you have valid Loggly credentials you can run tests with [vows][vows]:
 ``` bash
   $ npm test
 ```
+### Run Tests with Mock HTTP Request
+To mock the HTTP requests and run test cases in your local machine you can run the following command
+```bash
+  $ npm run test-as-mock
+```
+
 
 #### Author: [Charlie Robbins](http://www.github.com/indexzero)
 #### Contributors: [Marak Squires](http://github.com/marak), [hij1nx](http://github.com/hij1nx), [Kord Campbell](http://loggly.com), [Erik Hedenström](http://github.com/ehedenst),
