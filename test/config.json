@@ -1,5 +1,5 @@
  {
-    "token": "your-really-long-token-you-got-when-you-created-an-http-input",
+    "token": "your-loggly-token",
     "subdomain": "your-subdomain",
     "auth": {
       "username": "your-username",
