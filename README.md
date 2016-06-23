@@ -131,12 +131,12 @@ It is possible to send arrays, which will result in one single request to Loggly
   });
 ```
 
-The search() method can also take an Object parameter that allows you to set additional search parameters such as: rows, from, until, etc.
+The search() method can also take an Object parameter that allows you to set additional search parameters such as: size, from, until, etc.
 
 ``` js
   var util = require('util');
 
-  client.search({ query: '404', rows: 10 })
+  client.search({ query: '404', size: 10 })
     .run(function (err, results) {
       // Inspect the result set
       console.dir(results.events);
