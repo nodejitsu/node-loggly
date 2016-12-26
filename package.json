@@ -1,7 +1,7 @@
 {
   "name": "loggly",
   "description": "A client implementation for Loggly cloud Logging-as-a-Service API",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "author": "Charlie Robbins <charlie.robbins@gmail.com>",
   "repository": {
     "type": "git",
@@ -14,7 +14,7 @@
     "loggly"
   ],
   "dependencies": {
-    "request": "2.75.x",
+    "request": "^2.79.x",
     "timespan": "2.3.x",
     "json-stringify-safe": "5.0.x"
   },
