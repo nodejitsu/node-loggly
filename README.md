@@ -1,3 +1,7 @@
+# DEPRECATED
+
+in favour of https://github.com/loggly/node-loggly-bulk
+
 # node-loggly
 
 [![Version npm](https://img.shields.io/npm/v/loggly.svg?style=flat-square)](https://www.npmjs.com/package/loggly)[![npm Downloads](https://img.shields.io/npm/dm/loggly.svg?style=flat-square)](https://www.npmjs.com/package/loggly)[![Build Status](https://img.shields.io/travis/winstonjs/node-loggly/master.svg?style=flat-square)](https://travis-ci.org/winstonjs/node-loggly)[![Dependencies](https://img.shields.io/david/winstonjs/node-loggly.svg?style=flat-square)](https://david-dm.org/winstonjs/node-loggly)
