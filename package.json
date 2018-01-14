@@ -14,7 +14,7 @@
     "loggly"
   ],
   "dependencies": {
-    "request": "2.83.1",
+    "request": "2.83.0",
     "timespan": "2.3.x",
     "json-stringify-safe": "5.0.x"
   },
