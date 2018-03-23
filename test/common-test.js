@@ -27,6 +27,20 @@ vows.describe('node-loggly/common').addBatch({
       "should return a deep clone of the object": function (clone) {
         assert.isFalse(this.obj.deep === clone.deep);
       }
+    },
+
+    "the serialize() method": {
+      topic: function () {
+        this.obj = {
+          name: 'cyclical',
+        };
+
+        this.obj.cycle = this.obj;
+        return common.serialize(this.obj);
+      },
+      "should handle objects containing cyclical references": function (serialized) {
+        assert.equal("name=cyclical, cycle=<Circular>", serialized);
+      }
     }
   }
 }).export(module);
