@@ -8,15 +8,9 @@ node_js:
 before_install:
   - travis_retry npm install -g npm@2.14.5
   - travis_retry npm install --loglevel=http
-  - >
-    openssl aes-256-cbc \
-      -K $encrypted_4fb8e306b739_key \
-      -iv $encrypted_4fb8e306b739_iv \
-      -in test/config.json.enc \
-      -out test/config.json -d
 
 script:
-  - npm test
+  - npm run test-as-mock
 
 matrix:
   allow_failures:

@@ -20,12 +20,15 @@
   },
   "devDependencies": {
     "common-style": "^3.1.0",
-    "vows": "0.8.x"
+    "vows": "0.8.x",
+    "nock": "~7.2.2"
   },
   "main": "./lib/loggly",
   "scripts": {
     "pretest": "common lib/**/*.js lib/*.js test/helpers.js",
-    "test": "vows test/*-test.js --spec"
+    "test": "vows test/*-test.js --spec",
+    "pretest-as-mock": "common lib/**/*.js lib/*.js test-as-mock/helpers.js",
+    "test-as-mock": "vows test-as-mock/*-test.js --spec"
   },
   "license": "MIT",
   "engines": {
