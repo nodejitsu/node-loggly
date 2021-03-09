@@ -23,7 +23,7 @@ vows.describe('node-loggly/search').addBatch({
         topic: function() {
           nock("https://" + config.subdomain + ".loggly.com", {
               reqheaders: {
-                'authorization': 'Basic ' + new Buffer(config.auth.username + ":" + config.auth.password).toString('base64')
+                'authorization': 'Basic ' + Buffer.from(config.auth.username + ":" + config.auth.password, 'base64')
               }
             })
             .get('/apiv2/search')
@@ -55,7 +55,7 @@ vows.describe('node-loggly/search').addBatch({
             });
           nock("https://" + config.subdomain + ".loggly.com", {
               reqheaders: {
-                'authorization': 'Basic ' + new Buffer(config.auth.username + ":" + config.auth.password).toString('base64')
+                'authorization': 'Basic ' + Buffer.from(config.auth.username + ":" + config.auth.password, 'base64')
               }
             })
             .get('/apiv2/events')
@@ -95,7 +95,7 @@ vows.describe('node-loggly/search').addBatch({
         topic: function() {
           nock("https://" + config.subdomain + ".loggly.com", {
               reqheaders: {
-                'authorization': 'Basic ' + new Buffer(config.auth.username + ":" + config.auth.password).toString('base64')
+                'authorization': 'Basic ' + Buffer.from(config.auth.username + ":" + config.auth.password, 'base64')
               }
             })
             .get('/apiv2/search')
@@ -127,7 +127,7 @@ vows.describe('node-loggly/search').addBatch({
             });
           nock("https://" + config.subdomain + ".loggly.com", {
               reqheaders: {
-                'authorization': 'Basic ' + new Buffer(config.auth.username + ":" + config.auth.password).toString('base64')
+                'authorization': 'Basic ' + Buffer(config.auth.username + ":" + config.auth.password, 'base64')
               }
             }).get('/apiv2/events')
             .query({
