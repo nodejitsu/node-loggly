@@ -1,7 +1,7 @@
 {
   "name": "node-loggly-bulk",
   "description": "A client implementation for Loggly cloud Logging-as-a-Service API",
-  "version": "2.2.3",
+  "version": "2.2.5",
   "author": "Charlie Robbins <charlie.robbins@gmail.com>",
   "repository": {
     "type": "git",
@@ -19,15 +19,14 @@
     "json-stringify-safe": "5.0.x"
   },
   "devDependencies": {
-    "common-style": "^3.1.0",
-    "vows": "0.8.x",
-    "nock": "~7.2.2"
+    "eslint": "^7.21.0",
+    "nock": "^13.0.11",
+    "vows": "0.8.3"
   },
   "main": "./lib/loggly",
   "scripts": {
-    "pretest": "common lib/**/*.js lib/*.js test/helpers.js",
+    "lint": "eslint --max-warnings 0 --ext lib/**/*.js lib/*.js --fix",
     "test": "vows test/*-test.js --spec",
-    "pretest-as-mock": "common lib/**/*.js lib/*.js test-as-mock/helpers.js",
     "test-as-mock": "vows test-as-mock/*-test.js --spec"
   },
   "license": "MIT",
