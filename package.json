@@ -1,7 +1,7 @@
 {
   "name": "node-loggly-bulk",
   "description": "A client implementation for Loggly cloud Logging-as-a-Service API",
-  "version": "2.2.5",
+  "version": "3.0.0",
   "author": "Charlie Robbins <charlie.robbins@gmail.com>",
   "repository": {
     "type": "git",
