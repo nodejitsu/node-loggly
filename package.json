@@ -14,12 +14,12 @@
     "loggly"
   ],
   "dependencies": {
-    "request": ">=2.76.0 <3.0.0",
+    "request": ">=2.88.2 <3.0.0",
     "moment": "^2.18.1",
     "json-stringify-safe": "5.0.x"
   },
   "devDependencies": {
-    "eslint": "^7.21.0",
+    "eslint": "^8.2.0",
     "nock": "^13.0.11",
     "vows": "0.8.3"
   },
