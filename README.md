@@ -8,7 +8,7 @@ A client implementation for Loggly in node.js. Check out Loggly's [Node logging 
 
 ## Usage
 
-The `node-loggly-bulk` library is compliant with the [Loggly API][api]. Using `node-loggly-bulk` is easy for a variety of scenarios: logging, working with devices and inputs, searching, and facet searching.
+The `node-loggly-bulk` library is compliant with the [Loggly API][api]. Using `node-loggly-bulk` you can send logs to Loggly.
 
 ### Getting Started
 Before we can do anything with Loggly, we have to create a client with valid credentials. We will authenticate for you automatically:
@@ -19,10 +19,6 @@ Before we can do anything with Loggly, we have to create a client with valid cre
   var client = loggly.createClient({
     token: "your-really-long-input-token",
     subdomain: "your-subdomain",
-    auth: {
-      username: "your-username",
-      password: "your-password"
-    },
     //
     // Optional: Tag to send with EVERY log message
     //
@@ -82,11 +78,8 @@ It is also possible to log complex objects using the new JSON capabilities of Lo
 
 ``` js
   var config = {
+    token: 'token',
     subdomain: "your-subdomain",
-    auth: {
-      username: "your-username",
-      password: "your-password"
-    },
     json: true
   };
 ```
@@ -119,32 +112,6 @@ It is possible to send arrays, which will result in one single request to Loggly
   input.log([ {iam:'number 1'}, {iam:'number 2'} ])
 ```
 
-### Searching
-[Searching][search-api] with node-loggly-bulk is easy. All you have to do is use the search() method defined on each Loggly client:
-
-``` js
-  var util = require('util');
-
-  client.search('404', function (err, results) {
-    // Inspect the result set
-    console.dir(results.events);
-  });
-```
-
-The search() method can also take an Object parameter that allows you to set additional search parameters such as: rows, from, until, etc.
-
-``` js
-  var util = require('util');
-
-  client.search({ query: '404', rows: 10 })
-    .run(function (err, results) {
-      // Inspect the result set
-      console.dir(results.events);
-    });
-```
-
-See the [Loggly search guide][search] for more details on how to effectively search through your Loggly logs.
-
 ## Installation
 
 ### Installing npm (node package manager)
@@ -159,30 +126,10 @@ See the [Loggly search guide][search] for more details on how to effectively sea
 
 ## Run Tests
 
-### Run Tests by sending events to your Loggly Account
-All of the node-loggly-bulk tests are written in [vows][vows], and cover all of the use cases described above. You will need to add your Loggly username, password, subdomain, and your loggly token to test/config.json before running tests.
-
-``` js
-  {
-    "token": "your-really-long-token-you-got-when-you-created-an-http-input",
-    "subdomain": "your-subdomain",
-    "auth": {
-      "username": "your-username",
-      "password": "your-password"
-    }
-  }
-```
-
-Once you have valid Loggly credentials you can run tests with [vows][vows]:
-
 ``` bash
-  $ npm test
+  $ npm run test
 ```
-### Run Tests with Mock HTTP Request
-To mock the HTTP requests and run test cases in your local machine you can run the following command
-```bash
-  $ npm run test-as-mock
-```
+
 
 #### Author: [Charlie Robbins](http://www.github.com/indexzero)
 #### Contributors: [Marak Squires](http://github.com/marak), [hij1nx](http://github.com/hij1nx), [Kord Campbell](http://loggly.com), [Erik Hedenström](http://github.com/ehedenst),
