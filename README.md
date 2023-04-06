@@ -131,6 +131,7 @@ It is possible to send arrays, which will result in one single request to Loggly
 ```
 
 
+
 #### Author: [Charlie Robbins](http://www.github.com/indexzero)
 #### Contributors: [Marak Squires](http://github.com/marak), [hij1nx](http://github.com/hij1nx), [Kord Campbell](http://loggly.com), [Erik Hedenström](http://github.com/ehedenst),
 
