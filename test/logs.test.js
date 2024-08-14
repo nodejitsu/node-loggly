@@ -7,6 +7,7 @@ const origSetTimeout = global.setTimeout;
 
 describe('when trying to send logs', () => {
   beforeAll(() => {
+    jest.useFakeTimers();
     global.setTimeout = (cb, ms) => cb(); // ignore ms
   });
 
@@ -16,6 +17,7 @@ describe('when trying to send logs', () => {
 
   afterAll(() => {
     global.setTimeout = origSetTimeout;
+    jest.runAllTimers();
   });
 
   it('should set correct token, URL, tags, headers and response', (done) => {
